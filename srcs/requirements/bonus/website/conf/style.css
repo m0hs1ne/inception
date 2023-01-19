@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;800&display=swap");
+:root {
+  --Light_Cyan: hsl(193, 38%, 86%);
+  --Neon_Green: hsl(150, 100%, 66%);
+  --Grayish_Blue: hsl(217, 19%, 38%);
+  --Dark_Grayish_Blue: hsl(217, 19%, 24%);
+  --Dark_Blue: hsl(218, 23%, 16%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--Dark_Blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+body .container {
+  background-color: var(--Dark_Grayish_Blue);
+  width: 550px;
+  height: 350px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  transition: box-shadow 0.6s ease-in-out;
+}
+body .container .title {
+  font-family: "Manrope", sans-serif;
+  color: var(--Neon_Green);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-size: 8px;
+  padding-top: 30px;
+}
+body .container .advice {
+  font-family: "Manrope", sans-serif;
+  color: var(--Light_Cyan);
+  font-weight: 800;
+  font-size: 28px;
+  padding: 30px;
+  text-align: center;
+}
+body .container .button {
+  background-color: var(--Neon_Green);
+  padding: 15px;
+  height: 54px;
+  border-radius: 50%;
+}
+body .container .button:hover {
+  background-color: aqua;
+}
+body .container:hover {
+  box-shadow: 0px 0px 189px -18px rgba(0, 0, 0, 0.61);
+  -webkit-box-shadow: 0px 0px 189px -18px rgba(0, 0, 0, 0.61);
+  -moz-box-shadow: 0px 0px 189px -18px rgba(0, 0, 0, 0.61);
+} /*# sourceMappingURL=style.css.map */

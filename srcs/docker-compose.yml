@@ -1,5 +1,22 @@
 version: '3'
 
+
+volumes:
+  wp-volume:
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/mel-hada/data/wordpress
+
+  db-volume:
+    driver_opts:
+      o: bind
+      type: none
+      device: /home/mel-hada/data/mariadb
+
+networks:
+    inception:
+        driver: bridge
 services:
   nginx:
     build:
@@ -62,20 +79,38 @@ services:
     networks:
       - inception
     restart: always
-
-volumes:
-  wp-volume:
-    driver_opts:
-      o: bind
-      type: none
-      device: /home/mel-hada/data/wordpress
-
-  db-volume:
-    driver_opts:
-      o: bind
-      type: none
-      device: /home/mel-hada/data/mariadb
-
-networks:
-    inception:
-        driver: bridge
+  adminer:
+    build:
+      context: .
+      dockerfile: requirements/bonus/adminer/Dockerfile
+    container_name: adminer
+    ports:
+      - "8888:8888"
+    networks:
+     - inception
+    restart: always
+  website:
+    build:
+      context: .
+      dockerfile: requirements/bonus/website/Dockerfile
+    container_name: website
+    ports:
+      - "2002:2002"
+    networks:
+      - inception
+    restart: always
+  cadvisor:
+    build:
+      context: .
+      dockerfile: requirements/bonus/cadvisor/Dockerfile
+    container_name: cadvisor
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    ports: 
+      - "8080:8080"
+    networks:
+      - inception
+    restart: always

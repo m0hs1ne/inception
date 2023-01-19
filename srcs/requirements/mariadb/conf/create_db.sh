@@ -3,14 +3,7 @@
 if [ ! -d "/var/lib/mysql/mysql" ]; then
 
         chown -R mysql:mysql /var/lib/mysql
-
-        # init database
-        mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql --rpm
-
-        tfile=`mktemp`
-        if [ ! -f "$tfile" ]; then
-                return 1
-        fi
+        mysql_install_db --basedir=/usr --datadir=/var/lib/mysql --user=mysql
 fi
 
 if [ ! -d "/var/lib/mysql/wordpress" ]; then
@@ -28,7 +21,6 @@ CREATE USER '${DB_USER}'@'%' IDENTIFIED by '${DB_PASS}';
 GRANT ALL PRIVILEGES ON wordpress.* TO '${DB_USER}'@'%';
 FLUSH PRIVILEGES;
 EOF
-        # run init.sql
         /usr/bin/mysqld --user=mysql --bootstrap < /tmp/create_db.sql
         rm -f /tmp/create_db.sql
 fi
